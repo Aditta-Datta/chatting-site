@@ -1,5 +1,5 @@
 const socket = io();
-const encryptionKey = 'your-secure-key-123'; // Replace with a secure key
+const encryptionKey = process.env.ENCRYPTION_KEY || 'your-secure-key-123';
 
 function encryptMessage(message) {
   return CryptoJS.AES.encrypt(message, encryptionKey).toString();
@@ -61,6 +61,7 @@ if (document.getElementById('messageForm')) {
   const messages = document.getElementById('messages');
   const userList = document.getElementById('userList');
   const typing = document.getElementById('typing');
+  const activeCount = document.getElementById('activeCount');
   const chatData = JSON.parse(localStorage.getItem('chatData'));
   const { room, username } = chatData;
 
@@ -111,6 +112,10 @@ if (document.getElementById('messageForm')) {
       userList.appendChild(li);
     });
     socket.emit('seen', { room, username });
+  });
+
+  socket.on('activeCount', (count) => {
+    activeCount.textContent = `Chat Members Active: ${count}`;
   });
 
   socket.on('typing', ({ username: typer }) => {
