@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Chat</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Create Chat</h1>
+    <form id="createForm">
+      <input type="text" id="username" placeholder="Your Username" required>
+      <input type="text" id="room" placeholder="Chat Room Name" required>
+      <input type="password" id="password" placeholder="Set Chat Password" required>
+      <button type="submit">Create</button>
+    </form>
+    <p id="error" class="error"></p>
+  </div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <script src="client.js"></script>
+</body>
+</html>
